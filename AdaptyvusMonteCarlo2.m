@@ -24,20 +24,30 @@ rectangle('Position',[-10.0,-10.0,20.0,20.0],...
     'LineWidth',5,'LineStyle','--')
 
 %sumazinta sritis
-%{
-c=xMin1(1)-2; %sumazinta sritis
-d=xMin1(2)-2; %sumazinta sritis
+
+a2=xMin1(1)-2; %sumazinta sritis
+b2=xMin1(1)+2; %sumazinta sritis
+a3=xMin1(2)-2;
+b3=xMin1(2)+2;
+n=1;
 k2=50;% tasku (vektoriu) skaicius
-x2=c + (d-c).*rand(k2,n);% Perdaryti kad generuotu dvimacius
+x2(:,1)=a2 + (b2-a2).*rand(k2,n);% Perdaryti kad generuotu dvimacius
+x2(:,2)=a3 + (b3-a3).*rand(k2,n);
 f2=[];
-for i=0:k2
+for i=1:k2
   f2(i)=sincos2(x2(i,:));
 end
 [fMin2,indMin2]=min(f2);
 %[fMax2,indMax2]=max(f2);
-xMin2=x(indMin,:);
+xMin2=x2(indMin2,:);
 %xMax2=x2(indMax,:);
 fprintf('Surastas min=%6.4f taske x2=(%6.4f,%6.4f)\n',fMin2,xMin2(1),xMin2(2));
 %fprintf('Surastas max=%6.4f taske x=(%6.4f,%6.4f)\n',fMax2,xMax2(1),xMax2(2));
+hold on;
+scatter(x2(:,1),x2(:,2),'b.');
+scatter(xMin2(1),xMin2(2),'r*');
+text(xMin2(1)+0.3,xMin2(2),num2str(fMin1));
+rectangle('Position',[a2,a3,4.0,4.0],...
+    'LineWidth',5,'LineStyle','--')
 %grafikas2 
 %}
